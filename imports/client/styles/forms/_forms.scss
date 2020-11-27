@@ -1,0 +1,87 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: $s-size $m-size;
+  min-width: 24rem;
+  max-width: 28rem;
+}
+
+.form__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 28rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+// Shared Input Styles
+.text-input,
+.number-input,
+.select-input {
+  height: 5.6rem;
+  background: none;
+  // border: none;
+  // border-bottom: 2px solid $bg-black;
+  transition: all 0.3s ease-in-out;
+  font-size: 1.6rem;
+  margin-top: -1.6rem;
+  padding: 1.6rem 1.2rem 0;
+  line-height: 2rem;
+}
+
+.select-input {
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  border-radius: 0;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 125.304 125.304"><path d="M62.652 103.895L0 21.41h125.304" fill="%23000000"/></svg>');
+  background-repeat: no-repeat, repeat;
+  background-position: right 0.7em top 70%, 0 0;
+  background-size: 0.65em auto, 100%;
+  // background-color: #fff;
+}
+
+.text-input:focus,
+.number-input:focus,
+.select-input:focus {
+  // border-bottom: 2px solid $secondary-accent;
+  outline: none;
+}
+
+.label {
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+input:focus + .label,
+select:focus + .label {
+  // color: $secondary-accent;
+}
+
+.input__helper-text,
+.input__error {
+  margin-bottom: $m-size;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+}
+
+.input__helper-text {
+  opacity: 0.54;
+  font-weight: 300;
+}
+
+.input__error {
+  color: red;
+}
+
+.input--error {
+  border-bottom: 2px solid red;
+}
+
+input:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}

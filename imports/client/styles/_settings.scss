@@ -1,0 +1,67 @@
+// Colors
+$text-black: #11021c;
+$brand-red: #e23e57;
+$brand-dusk-shade: #522546;
+$brand-dusk: #311d3f;
+$brand-dusk--faded: #6c5b7c;
+$bg-cream: #fcf8f2;
+
+// https://colorhunt.co/palette/15697
+// https://colorhunt.co/palette/100885
+// https://colorhunt.co/palette/117448
+// https://colorhunt.co/palette/108574
+
+// Spacing
+$xs-size: 1rem;
+$s-size: 1.2rem;
+$m-size: 1.6rem;
+$l-size: 3.2rem;
+$xl-size: 4.8rem;
+
+// Breakpoints
+@mixin for-phone-only {
+  @media (max-width: 599px) {
+    @content;
+  }
+}
+@mixin for-tablet-portrait-up {
+  @media (min-width: 600px) {
+    @content;
+  }
+}
+@mixin for-tablet-landscape-up {
+  @media (min-width: 900px) {
+    @content;
+  }
+}
+@mixin for-desktop-up {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+@mixin for-big-desktop-up {
+  @media (min-width: 1800px) {
+    @content;
+  }
+}
+
+// Box Shaddows
+$depth-1: 0 1px 3px rgba(29, 29, 37, 0.12), 0 1px 2px rgba(29, 29, 37, 0.24);
+$depth-2: 0 3px 6px rgba(29, 29, 37, 0.16), 0 3px 6px rgba(29, 29, 37, 0.23);
+$depth-3: 0 10px 20px rgba(29, 29, 37, 0.19), 0 6px 6px rgba(29, 29, 37, 0.23);
+$depth-4: 0 14px 28px rgba(29, 29, 37, 0.25), 0 10px 10px rgba(29, 29, 37, 0.22);
+$depth-5: 0 19px 38px rgba(29, 29, 37, 0.3), 0 15px 12px rgba(29, 29, 37, 0.22);
+
+// Z-Index
+$z-top: 50;
+$z-1: 3;
+$z-2: 2;
+$z-3: 1;
+$z-bottom: -50;
+
+// Font
+$display-font: "Suez One", sans-serif;
+$body-font: "Roboto", sans-serif;
+
+// Animation
+$default-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);

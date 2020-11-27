@@ -1,0 +1,36 @@
+.page-layout__app-header {
+  height: 7.2rem;
+  box-shadow: $depth-3;
+  padding: 0 $s-size;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #311d3f;
+  h1 {
+    font-size: $l-size;
+    font-weight: 700;
+    font-family: $display-font;
+    color: #fff;
+  }
+  button {
+    color: #e75f74;
+    &:hover {
+      color: #e23e57;
+    }
+  }
+}
+.page-layout__app-footer {
+  background: #fff;
+  height: 6.4rem;
+  padding: 0 $s-size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+}
+
+.page-layout__wrapper--padded {
+  padding: $l-size $l-size $xl-size;
+}
