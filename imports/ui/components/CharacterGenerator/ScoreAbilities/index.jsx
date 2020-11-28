@@ -8,7 +8,7 @@ const ScoreAbilities = ({ onScoreAbilities }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
     <div>
-      <h1>Score Abilities</h1>
+      <h1 className="header--underlined">Score Abilities</h1>
       <Tabs
         activeIndex={activeIndex}
         labels={labels}

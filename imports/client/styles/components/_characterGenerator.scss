@@ -10,3 +10,27 @@
     font-weight: 700;
   }
 }
+
+.score-abilities__form {
+  button {
+    margin-top: $m-size;
+  }
+}
+.score-abilities__form-row {
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 $xs-size;
+  height: $l-size;
+  select {
+    margin-left: $s-size;
+  }
+  &:nth-child(odd) {
+    background: $light-gray--O32;
+  }
+}
+
+.perk-select__radio-buttons {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: $m-size;
+}

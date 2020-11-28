@@ -50,12 +50,12 @@ const StandardArray = ({ onScoreAbilities }) => {
     }
   };
   return (
-    <div>
-      <h1>Standard Array</h1>
+    <div className="score-abilities__form">
+      <h2>Standard Array</h2>
       <p>{error}</p>
       <form onSubmit={handleSubmit}>
         {abilities.map((ability) => (
-          <div key={ability}>
+          <div key={ability} className="score-abilities__form-row">
             <label>
               {ability}
               <select

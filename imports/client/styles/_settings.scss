@@ -1,9 +1,14 @@
 // Colors
 $text-black: #11021c;
 $brand-red: #e23e57;
+$brand-red-shade: #88304e;
 $brand-dusk-shade: #522546;
+$brand-dusk-shade-O24: #5225463d;
 $brand-dusk: #311d3f;
 $brand-dusk--faded: #6c5b7c;
+$medium-gray: #8a868e;
+$light-gray: #dad6dd;
+$light-gray--O32: #dad6dd52;
 $bg-cream: #fcf8f2;
 
 // https://colorhunt.co/palette/15697
@@ -62,6 +67,14 @@ $z-bottom: -50;
 // Font
 $display-font: "Suez One", sans-serif;
 $body-font: "Roboto", sans-serif;
+
+// Line Height
+$leading-none: 1;
+$leading-tight: 1.25;
+$leading-snug: 1.375;
+$leading-normal: 1.5;
+$leading-relaxed: 1.625;
+$leading-loose: 2;
 
 // Animation
 $default-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);

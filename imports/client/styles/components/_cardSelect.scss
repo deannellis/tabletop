@@ -1,6 +1,8 @@
 .card-select {
   display: flex;
   justify-content: center;
+  padding: $l-size 0 $xl-size;
+  height: 36rem;
 }
 
 .card-select__card {
@@ -15,6 +17,7 @@
   }
   border-radius: 8px;
   text-align: center;
+  padding: 0 $m-size;
   transition: $default-transition;
 }
 

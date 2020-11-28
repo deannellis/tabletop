@@ -5,19 +5,23 @@ const Finalize = ({ onFinalize }) => {
   const [error, setError] = useState("");
   return (
     <div>
-      <h1>Finalize Character</h1>
-      <label>
-        Name your character
-        {error !== "" && <span>{error}</span>}
+      <h1 className="header--underlined">Finalize Character</h1>
+      <h2>Name your character</h2>
+      <div className="input-group">
+        <div className="input__error">{!!error ? error : " "}</div>
         <input
           type="text"
+          className={`text-input ${!!error && "input--error"}`}
           value={charName}
           onChange={(e) => {
             setCharName(e.target.value);
           }}
         />
-      </label>
+
+        <label>Name </label>
+      </div>
       <button
+        className="button"
         onClick={() => {
           if (charName.length === 0) {
             setError("Name is required");

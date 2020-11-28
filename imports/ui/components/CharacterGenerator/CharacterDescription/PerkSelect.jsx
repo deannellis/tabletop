@@ -12,14 +12,15 @@ const PerkSelect = ({ knownLanguages, bgPerk, setBGPerk }) => {
     .filter((language) => language != undefined);
 
   return (
-    <label>
-      Language or Tool Proficiency?
+    <div>
+      <h3>Add a Language or Tool Proficiency</h3>
       <form
         onSubmit={(e) => {
           e.preventDefault();
         }}
       >
         <div
+          className="perk-select__radio-buttons"
           onChange={(e) => {
             const { value } = e.target;
             if (value === "tool") {
@@ -50,21 +51,22 @@ const PerkSelect = ({ knownLanguages, bgPerk, setBGPerk }) => {
         </div>
       </form>
       {toolOrLang === "tool" && (
-        <label>
-          Enter Tool:
+        <div className="input-group">
           <input
             type="text"
             value={bgPerk}
+            className="text-input"
             onChange={(e) => {
               setBGPerk(e.target.value);
             }}
           />
-        </label>
+          <label className="label">Enter Tool:</label>
+        </div>
       )}
       {toolOrLang === "lang" && (
-        <label>
-          Select Language
+        <div className="input-group">
           <select
+            className="select-input"
             value={bgPerk}
             onChange={(e) => {
               setBGPerk(e.target.value);
@@ -77,9 +79,10 @@ const PerkSelect = ({ knownLanguages, bgPerk, setBGPerk }) => {
               </option>
             ))}
           </select>
-        </label>
+          <label className="label">Select Language</label>
+        </div>
       )}
-    </label>
+    </div>
   );
 };
 
