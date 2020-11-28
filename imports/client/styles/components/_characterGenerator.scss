@@ -34,3 +34,14 @@
   flex-direction: column;
   margin-bottom: $m-size;
 }
+
+.character-generator__form-wrapper {
+  display: flex;
+  // justify-content: center;
+}
+.character-generator__form {
+  width: 64%;
+  background: #ffffffd6;
+  box-shadow: $depth-1;
+  padding: $xs-size $l-size $xl-size;
+}
