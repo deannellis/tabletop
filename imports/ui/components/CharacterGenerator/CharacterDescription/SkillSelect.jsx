@@ -5,16 +5,20 @@ import { skills } from "../../../../utils/Game";
 const SkillSelect = ({ bgProficiency, setBGProficiency }) => {
   const skillNames = skills.map((skill) => skill.name);
   return (
-    <select
-      value={bgProficiency}
-      onChange={(e) => {
-        setBGProficiency(e.target.value);
-      }}
-    >
-      {skillNames.map((skill) => (
-        <option value={skill}>{skill}</option>
-      ))}
-    </select>
+    <div className="input-group">
+      <select
+        className="select-input"
+        value={bgProficiency}
+        onChange={(e) => {
+          setBGProficiency(e.target.value);
+        }}
+      >
+        {skillNames.map((skill) => (
+          <option value={skill}>{skill}</option>
+        ))}
+      </select>
+      <label className="label">Skill Proficiency</label>
+    </div>
   );
 };
 

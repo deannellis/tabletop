@@ -13,19 +13,18 @@ const RaceSelect = ({ onSelectRace }) => {
   const [error, setError] = useState("");
   return (
     <div>
-      <h1>Select Your Race</h1>
+      <h1 className="header--underlined">Select Your Race</h1>
       <CardSelect>
         {raceInfo.map(({ name, description }) => (
           <div key={name} className="race-select__race">
             <h2>{name}</h2>
             {/* <p>{description}</p> */}
             {name === "Human" && (
-              <label>
-                Select your additional language
-                <br></br>
-                {!!error && <p>{error}</p>}
+              <div className="input-group">
+                <div className="input__error">{!!error ? error : ""}</div>
                 <select
                   value={bonusLang}
+                  className={`select-input ${!!error ? "input--error" : ""}`}
                   onChange={(e) => {
                     setBonusLang(e.target.value);
                   }}
@@ -37,7 +36,8 @@ const RaceSelect = ({ onSelectRace }) => {
                     </option>
                   ))}
                 </select>
-              </label>
+                <label className="label">Select your additional language</label>
+              </div>
             )}
             <button
               className="button"

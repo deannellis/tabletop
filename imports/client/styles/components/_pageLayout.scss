@@ -20,7 +20,8 @@
   }
 }
 .page-layout__app-footer {
-  background: #fff;
+  background: $brand-dusk--faded;
+  color: #fff;
   height: 6.4rem;
   padding: 0 $s-size;
   display: flex;
@@ -29,6 +30,9 @@
   position: absolute;
   bottom: 0;
   width: 100vw;
+  a {
+    color: #fff;
+  }
 }
 
 .page-layout__wrapper--padded {

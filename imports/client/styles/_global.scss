@@ -29,6 +29,20 @@ h1 {
   letter-spacing: 0.4px;
 }
 
+.header--underlined {
+  border-bottom: 2px solid $brand-dusk--faded;
+}
+
+h2 {
+  font-family: $display-font;
+  letter-spacing: 0.4px;
+  color: $brand-dusk--faded;
+}
+
 p {
   opacity: 0.84;
+}
+
+.space-l {
+  height: $l-size;
 }
