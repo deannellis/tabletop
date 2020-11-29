@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Tabs from "../../Tabs";
-import TestForm from "../../../forms/TestForm";
+import AbilitiesForm from "../../../forms/AbilitiesForm";
 import StandardArray from "./StandardArray";
 
 const ScoreAbilities = ({ onScoreAbilities }) => {
-  const labels = ["Standard Array", "Roll Scores", "Input Scores"];
+  const labels = ["Standard Array", "Input Scores"];
   const [activeIndex, setActiveIndex] = useState(0);
   return (
     <div>
@@ -17,14 +17,7 @@ const ScoreAbilities = ({ onScoreAbilities }) => {
         {activeIndex === 0 && (
           <StandardArray onScoreAbilities={onScoreAbilities} />
         )}
-        {activeIndex === 1 && (
-          <TestForm
-            onSubmit={(values) => {
-              console.log(values);
-            }}
-          />
-        )}
-        {activeIndex === 2 && <h1>3</h1>}
+        {activeIndex === 1 && <AbilitiesForm onSubmit={onScoreAbilities} />}
       </Tabs>
     </div>
   );
