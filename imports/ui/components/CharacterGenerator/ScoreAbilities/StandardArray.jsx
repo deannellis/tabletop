@@ -56,21 +56,19 @@ const StandardArray = ({ onScoreAbilities }) => {
       <form onSubmit={handleSubmit}>
         {abilities.map((ability) => (
           <div key={ability} className="score-abilities__form-row">
-            <label>
-              {ability}
-              <select
-                value={getAbilityState(ability).value}
-                onChange={(e) => {
-                  getAbilityState(ability).update(parseInt(e.target.value));
-                }}
-              >
-                {scores.map((score) => (
-                  <option value={score} key={score}>
-                    {score}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <label>{ability}</label>
+            <select
+              value={getAbilityState(ability).value}
+              onChange={(e) => {
+                getAbilityState(ability).update(parseInt(e.target.value));
+              }}
+            >
+              {scores.map((score) => (
+                <option value={score} key={score}>
+                  {score}
+                </option>
+              ))}
+            </select>
           </div>
         ))}
         <button className="button" type="submit">

@@ -13,17 +13,15 @@
 
 .score-abilities__form {
   button {
-    margin-top: $m-size;
+    margin-top: $l-size;
   }
 }
 .score-abilities__form-row {
   display: flex;
   align-items: center;
-  padding: 0 0 0 $xs-size;
-  height: $l-size;
-  select {
-    margin-left: $s-size;
-  }
+  justify-content: space-between;
+  padding: 0 $xs-size;
+  height: $xl-size;
   &:nth-child(odd) {
     background: $light-gray--O32;
   }
