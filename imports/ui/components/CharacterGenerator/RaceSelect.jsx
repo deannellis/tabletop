@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-import { raceInfo, languages } from "../../../utils/Game";
+import { languages } from "../../../utils/Game";
+import { raceInfo } from "../../../utils/race";
 import CardSelect from "../CardSelect";
 
 const RaceSelect = ({ onSelectRace }) => {

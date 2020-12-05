@@ -23,7 +23,11 @@ class DashboardPage extends Component {
           {charactersLoading ? <p>Loading...</p> : ""}
           {characters.map((character) => {
             console.log("hope id works", character);
-            return <p>{character.charName}</p>;
+            return (
+              <Link to={`/view-character/${character._id}`}>
+                {character.charName}
+              </Link>
+            );
           })}
         </div>
       </PageLayout>
@@ -43,7 +47,7 @@ export default withTracker(() => {
     return { ...noDataAvailable, charactersLoading: true };
   }
 
-  const characters = CharactersCollection.find({});
+  const characters = CharactersCollection.find({}).fetch();
 
   return { characters, charactersLoading: false };
 })(withRouter(DashboardPage));

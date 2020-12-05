@@ -3,13 +3,9 @@ import { Meteor } from "meteor/meteor";
 import moment from "moment";
 import SimpleSchema from "simpl-schema";
 
-import {
-  alignmentShorthands,
-  classInfo,
-  languages,
-  skills,
-  raceInfo,
-} from "../../utils/Game";
+import { alignmentShorthands, languages, skills } from "../../utils/Game";
+import { classInfo, getInitialHP } from "../../utils/charClass";
+import { raceInfo, getSpeed } from "../../utils/race";
 import CharactersCollection from "../../db/characters/collection";
 
 const charClasses = classInfo
@@ -63,10 +59,21 @@ Meteor.methods({
       "toolProficiencies.$": { type: String },
     }).validate(character);
 
+    const {
+      abilities: { Constitution },
+      charClass,
+      race,
+    } = character;
+    const hitPoints = getInitialHP(charClass, Constitution);
+    const speed = getSpeed(race);
     CharactersCollection.insert({
       ...character,
       updatedAt: moment().valueOf(),
       userId: this.userId,
+      experience: 0,
+      level: 1,
+      hitPoints,
+      speed,
     });
   },
 });

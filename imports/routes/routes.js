@@ -8,11 +8,16 @@ import CharacterCreationPage from "../ui/CharacterCreationPage";
 import LoginPage from "../ui/LoginPage";
 import SignUpPage from "../ui/SignUpPage";
 import NotFoundPage from "../ui/NotFoundPage";
+import ViewCharacterPage from "../ui/ViewCharacterPage";
 import TestUiPage from "../ui/TestUiPage";
 
 const history = createHistory();
 const unauthenticatedPages = ["/", "/signup"];
-const authenticatedPages = ["/dashboard", "/create-character"];
+const authenticatedPages = [
+  "/dashboard",
+  "/create-character",
+  "/view-character",
+];
 
 export const onAuthChange = (isAuthenticated) => {
   const pathname = history.location.pathname;
@@ -37,6 +42,7 @@ export const routes = (
       <Route path="/" component={LoginPage} exact />
       <Route path="/dashboard" component={DashboardPage} />
       <Route path="/create-character" component={CharacterCreationPage} />
+      <Route path="/view-character/:charId" component={ViewCharacterPage} />
       <Route path="/signup" component={SignUpPage} />
       <Route path="/testui" component={TestUiPage} />
       <Route path="*" component={NotFoundPage} />

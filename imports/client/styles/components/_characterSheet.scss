@@ -1,0 +1,185 @@
+.character-sheet {
+  background: #fff;
+  box-shadow: $depth-1;
+  padding: $l-size $m-size $xl-size;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 8px 6px;
+  background: #fff;
+}
+
+.character-sheet__cell {
+  background: $brand-dusk--faded-O4;
+  padding: $m-size $m-size $l-size;
+  border-radius: 0.8rem;
+  span {
+    @extend .character-sheet__cell-title;
+  }
+}
+.character-sheet__cell-split {
+  display: flex;
+}
+
+.character-sheet__cell-title {
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  letter-spacing: 0.7px;
+}
+
+.character-sheet__name {
+  grid-column: 1 / span 4;
+}
+.character-sheet__overview {
+  display: flex;
+  flex-direction: column;
+}
+.character-sheet__overview--1 {
+  @extend .character-sheet__overview;
+  grid-column: 5 / span 1;
+}
+.character-sheet__overview--2 {
+  @extend .character-sheet__overview;
+  grid-column: 6 / span 1;
+}
+.character-sheet__alignment {
+  grid-column: 7 / span 1;
+}
+.character-sheet__level {
+  grid-column: 9 / span 1;
+}
+.character-sheet__proficiency-bonus {
+  grid-column: 1 / span 1;
+}
+.character-sheet__strength {
+  grid-column: 2 / span 1;
+}
+.character-sheet__dexterity {
+  grid-column: 3 / span 1;
+}
+.character-sheet__constitution {
+  grid-column: 4 / span 1;
+}
+.character-sheet__intelligence {
+  grid-column: 5 / span 1;
+}
+.character-sheet__wisdom {
+  grid-column: 6 / span 1;
+}
+.character-sheet__charisma {
+  grid-column: 7 / span 1;
+}
+.character-sheet__armor-class {
+  grid-column: 8 / span 1;
+}
+.character-sheet__hit-points {
+  grid-column: 9 / span 1;
+}
+.character-sheet__speed {
+  grid-column: 3 / span 1;
+}
+.character-sheet__initiative {
+  grid-column: 4 / span 1;
+}
+.character-sheet__hitDice {
+  grid-column: 5 / span 1;
+}
+.character-sheet__death-saves {
+  grid-column: 6 / span 2;
+}
+.character-sheet__skills {
+  grid-column: 1 / span 2;
+}
+.character-sheet__languages {
+  grid-column: 8 / span 2;
+}
+.character-sheet__background {
+  grid-column: 3 / span 2;
+  display: flex;
+  flex-direction: column;
+  div {
+    flex-grow: 1;
+    margin: 0.8rem 0 0;
+    &:first-child {
+      margin: 0;
+    }
+  }
+}
+
+.character-sheet__level,
+.character-sheet__proficiency-bonus,
+.character-sheet__strength,
+.character-sheet__dexterity,
+.character-sheet__constitution,
+.character-sheet__intelligence,
+.character-sheet__wisdom,
+.character-sheet__charisma,
+.character-sheet__armor-class,
+.character-sheet__hit-points,
+.character-sheet__speed,
+.character-sheet__initiative,
+.character-sheet__hitDice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  span {
+    @extend .character-sheet__cell-title;
+    margin: $m-size 0 $xs-size;
+  }
+  h1 {
+    margin: 0;
+    color: $brand-dusk-shade;
+    font-size: $xl-size;
+  }
+  p {
+    font-weight: 300;
+    font-size: 2rem;
+    margin: $s-size 0 0;
+  }
+}
+
+.character-sheet__saving-throws {
+  grid-column: 1 / span 2;
+  ul {
+    line-height: $leading-relaxed;
+    list-style: circle;
+    .character-sheet__saving-throw--filled {
+      list-style: disc;
+    }
+  }
+}
+
+.character-sheet__death-saves {
+  div,
+  ul {
+    display: flex;
+    align-items: center;
+    margin: 0;
+  }
+  div {
+    margin-top: $s-size;
+  }
+  li {
+    margin-right: $l-size;
+    list-style: circle;
+    font-size: $l-size;
+  }
+}
+
+.character-sheet__skills {
+  ul {
+    list-style: circle;
+  }
+  li {
+    line-height: $leading-loose;
+    span {
+      float: right;
+      text-align: right;
+    }
+    &:nth-child(odd) {
+      background: #fff;
+    }
+  }
+}
+.character-sheet__skill--filled {
+  list-style: disc;
+}
