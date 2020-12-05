@@ -34,3 +34,10 @@
     box-shadow: none;
   }
 }
+
+.button--outline {
+  @extend .button;
+  background: $brand-dusk--faded-O4;
+  box-shadow: none;
+  color: $brand-dusk;
+}

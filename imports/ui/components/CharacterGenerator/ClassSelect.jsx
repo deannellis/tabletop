@@ -1,7 +1,7 @@
 import React from "react";
 
 import CardSelect from "../CardSelect";
-import { classInfo } from "../../../utils/Game";
+import { classInfo } from "../../../utils/charClass";
 
 const ClassSelect = ({ onSelectClass }) => {
   return (
