@@ -10,6 +10,15 @@ export const alignmentShorthands = [
   "CE",
 ];
 
+export const abilities = [
+  "Strength",
+  "Dexterity",
+  "Constitution",
+  "Intelligence",
+  "Wisdom",
+  "Charisma",
+];
+
 export const printAlignment = (shorthand) => {
   switch (shorthand) {
     case "LG":

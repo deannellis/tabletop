@@ -17,6 +17,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-modal": "^3.12.1",
     "react-router-dom": "^5.2.0",
     "simpl-schema": "^1.10.2",
     "yup": "^0.29.3"

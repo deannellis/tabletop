@@ -1,13 +1,44 @@
+const darkVision = {
+  title: "Dark Vision",
+  description:
+    "You have superior vision in dark & dim conditions within 60 feet",
+};
+
 export const raceInfo = [
   {
     name: "Dwarf",
     description:
       "Bold and hardy, dwarves are known as skilled warriors, miners, and workers of stone and metal. Though they stand well under 5 feet tall, dwarves are so broad and compact that they can weigh as much as a human standing nearly two feet taller. Their courage and endurance are also easily a match for any of the larger folk.",
+    size: "medium",
+    traits: [
+      { ...darkVision },
+      {
+        title: "Dwarven Resilience",
+        description:
+          "You have advantage on saving throws against poison, and you have resistance against poison damage",
+      },
+      {
+        title: "Dwarven Combat Training",
+        description:
+          "You have proficiency with the battleaxe, handaxe, light hammer, and warhammer",
+      },
+      {
+        title: "Stonecunning",
+        description:
+          "Whenever you make a History check related to the origin of stonework, you are considered proficient and add double your proficiency bonus to the check",
+      },
+    ],
   },
+
   {
     name: "Elf",
     description:
       "Elves are a magical people of otherworldly grace, living in the world but not entirely part of it. They live in places of ethereal beauty, in the midst of ancient forests or in silvery spires glittering with faerie light, where soft music drifts through the air and gentle fragrances waft on the breeze. Elves love nature and magic, art and artistry, music and poetry, and the good things of the world.",
+    size: "medium",
+    traits: [
+      { ...darkVision },
+      { title: "Keen Senses", description: "You are proficient in Perception" },
+    ],
   },
   {
     name: "Halfling",

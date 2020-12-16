@@ -8,7 +8,11 @@ import {
 import PerkSelect from "./PerkSelect";
 import SkillSelect from "./SkillSelect";
 
-const CharacterDescription = ({ onSubmitDescription, knownLanguages }) => {
+const CharacterDescription = ({
+  onSubmitDescription,
+  knownLanguages,
+  currentSkills,
+}) => {
   const [alignment, setAlignment] = useState("N");
   const [bgTitle, setBGTitle] = useState("");
   const [personalityTrait, setPersonalityTrait] = useState("");
@@ -59,7 +63,6 @@ const CharacterDescription = ({ onSubmitDescription, knownLanguages }) => {
       return;
     }
 
-    console.log("success");
     let toolProficiencies = [];
     if (languageNames.includes(bgPerk1)) {
       addedLanguages = [...addedLanguages, bgPerk1];
@@ -190,11 +193,13 @@ const CharacterDescription = ({ onSubmitDescription, knownLanguages }) => {
           <SkillSelect
             bgProficiency={bgProficiency1}
             setBGProficiency={setBGProficiency1}
+            currentSkills={currentSkills}
           />
           <div className="space-l"></div>
           <SkillSelect
             bgProficiency={bgProficiency2}
             setBGProficiency={setBGProficiency2}
+            currentSkills={currentSkills}
           />
           <div className="input__error">
             {bgProficiency1 === bgProficiency2

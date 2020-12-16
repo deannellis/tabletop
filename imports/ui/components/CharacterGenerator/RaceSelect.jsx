@@ -11,6 +11,7 @@ const RaceSelect = ({ onSelectRace }) => {
     })
     .filter((language) => language != undefined);
   const [bonusLang, setBonusLang] = useState("");
+  let [dwarfType, setDwarfType] = useState("Mountain Dwarf");
   const [error, setError] = useState("");
   return (
     <div>
@@ -19,7 +20,60 @@ const RaceSelect = ({ onSelectRace }) => {
         {raceInfo.map(({ name, description }) => (
           <div key={name} className="race-select__race">
             <h2>{name}</h2>
-            {/* <p>{description}</p> */}
+            {name === "Dwarf" && (
+              <>
+                <div
+                  className="input-group"
+                  onChange={(e) => {
+                    const { value } = e.target;
+                    setDwarfType(value);
+                  }}
+                >
+                  <label className="race-select__radio-button">
+                    <input
+                      type="radio"
+                      name="dwarfType"
+                      value="Hill Dwarf"
+                      checked={dwarfType === "Hill Dwarf"}
+                    />
+                    <h3>Hill Dwarf</h3>
+                  </label>
+                  <label className="race-select__radio-button">
+                    <input
+                      type="radio"
+                      name="dwarfType"
+                      value="Mountain Dwarf"
+                      checked={dwarfType === "Mountain Dwarf"}
+                    />
+                    <h3>Mountain Dwarf</h3>
+                  </label>
+                </div>
+                {dwarfType === "Hill Dwarf" ? (
+                  <div>
+                    <p>
+                      As a hill dwarf, you have keen senses, deep intuition, and
+                      remarkable resilience.
+                    </p>
+                    <ul>
+                      <li>+1 Widsom</li>
+                      <li>+1 Hit Point Max</li>
+                      <li>+1 Hit Point Max per level</li>
+                    </ul>
+                  </div>
+                ) : (
+                  <div>
+                    <p>
+                      As a mountain dwarf, you're strong and hardy, accustomed
+                      to a difficult life in rugged terrain
+                    </p>
+                    <ul>
+                      <li>+2 Strength</li>
+                      <li>Light/Medium Armor Proficiency</li>
+                    </ul>
+                  </div>
+                )}
+              </>
+            )}
             {name === "Human" && (
               <div className="input-group">
                 <div className="input__error">{!!error ? error : ""}</div>
@@ -47,7 +101,7 @@ const RaceSelect = ({ onSelectRace }) => {
                   setError("Please choose an additional language");
                   return;
                 }
-                onSelectRace(name, bonusLang);
+                onSelectRace(name, bonusLang, dwarfType);
               }}
             >
               Choose Race
