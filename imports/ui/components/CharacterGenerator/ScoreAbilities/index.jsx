@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import Tabs from "../../Tabs";
 import AbilitiesForm from "../../../forms/AbilitiesForm";
 import StandardArray from "./StandardArray";
+import BonusAbilities from "./BonusAbilities";
 
-const ScoreAbilities = ({ onScoreAbilities }) => {
+const ScoreAbilities = ({ onScoreAbilities, race }) => {
   const labels = ["Standard Array", "Input Scores"];
   const [activeIndex, setActiveIndex] = useState(0);
   return (

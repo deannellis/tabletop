@@ -1,0 +1,22 @@
+.ReactModal__Overlay {
+  z-index: $z-top;
+}
+.ReactModal__Overlay,
+.ReactModal__Content {
+  opacity: 0;
+  transition: $default-transition;
+}
+
+.ReactModal__Overlay--after-open,
+.ReactModal__Content--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close,
+.ReactModal__Content--before-close {
+  opacity: 0;
+}
+
+.ReactModal__Content {
+  box-shadow: $depth-5;
+}

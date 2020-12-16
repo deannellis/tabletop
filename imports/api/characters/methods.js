@@ -5,7 +5,7 @@ import SimpleSchema from "simpl-schema";
 
 import { alignmentShorthands, languages, skills } from "../../utils/Game";
 import { classInfo, getInitialHP } from "../../utils/charClass";
-import { raceInfo, getSpeed } from "../../utils/race";
+import { raceInfo } from "../../utils/race";
 import CharactersCollection from "../../db/characters/collection";
 
 const charClasses = classInfo
@@ -41,6 +41,16 @@ Meteor.methods({
       personalityTrait: { type: String, min: 1, max: 256 },
       title: { type: String, min: 1, max: 64 },
     });
+    const proficienciesSchema = new SimpleSchema({
+      armor: { type: Array },
+      "armor.$": { type: String },
+      weapons: { type: Array },
+      "weapons.$": { type: String },
+      tools: { type: Array },
+      "tools.$": { type: String },
+      skills: { type: Array },
+      "skills.$": { type: String, allowedValues: skillNames },
+    });
     new SimpleSchema({
       abilities: abilitiesSchema,
       alignment: { type: String, allowedValues: alignmentShorthands },
@@ -52,20 +62,17 @@ Meteor.methods({
         type: String,
         allowedValues: languageNames,
       },
-      proficiencies: { type: Array },
-      "proficiencies.$": { type: String, allowedValues: skillNames },
+      proficiencies: proficienciesSchema,
       race: { type: String, allowedValues: races },
-      toolProficiencies: { type: Array },
-      "toolProficiencies.$": { type: String },
+      subRace: { type: String },
     }).validate(character);
 
     const {
       abilities: { Constitution },
       charClass,
-      race,
+      subRace,
     } = character;
-    const hitPoints = getInitialHP(charClass, Constitution);
-    const speed = getSpeed(race);
+    const hitPoints = getInitialHP(charClass, Constitution, subRace);
     CharactersCollection.insert({
       ...character,
       updatedAt: moment().valueOf(),
@@ -73,7 +80,6 @@ Meteor.methods({
       experience: 0,
       level: 1,
       hitPoints,
-      speed,
     });
   },
 });

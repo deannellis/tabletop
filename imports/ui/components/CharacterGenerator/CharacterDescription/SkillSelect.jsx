@@ -2,8 +2,12 @@ import React, { useState } from "react";
 
 import { skills } from "../../../../utils/Game";
 
-const SkillSelect = ({ bgProficiency, setBGProficiency }) => {
-  const skillNames = skills.map((skill) => skill.name);
+const SkillSelect = ({ bgProficiency, setBGProficiency, currentSkills }) => {
+  const skillNames = skills
+    .map((skill) => {
+      if (!currentSkills.includes(skill.name)) return skill.name;
+    })
+    .filter((skill) => skill != undefined);
   return (
     <div className="input-group">
       <select

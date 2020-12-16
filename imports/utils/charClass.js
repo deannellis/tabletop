@@ -86,15 +86,16 @@ export const classInfo = [
   },
 ];
 
-export const getInitialHP = (charClass, con) => {
+export const getInitialHP = (charClass, con, subRace) => {
+  const subRaceBonus = subRace === "Hill Dwarf" ? 1 : 0;
   const conMod = getScoreModifier(con);
-  if (charClass === "Barbarian") return 12 + conMod;
+  if (charClass === "Barbarian") return 12 + conMod + subRaceBonus;
   if (
     charClass === "Fighter" ||
     charClass === "Paladin" ||
     charClass === "Ranger"
   ) {
-    return 10 + conMod;
+    return 10 + conMod + subRaceBonus;
   }
   if (
     charClass === "Bard" ||
@@ -104,10 +105,10 @@ export const getInitialHP = (charClass, con) => {
     charClass === "Rogue" ||
     charClass === "Warlock"
   ) {
-    return 8 + conMod;
+    return 8 + conMod + subRaceBonus;
   }
   if (charClass === "Sorcerer" || charClass === "Wizard") {
-    return 6 + conMod;
+    return 6 + conMod + subRaceBonus;
   }
 };
 

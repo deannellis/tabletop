@@ -32,9 +32,14 @@ if (Meteor.isServer) {
         charClass: "Fighter",
         charName: "first character",
         knownLanguages: ["Common", "Dwarvish"],
-        proficiencies: ["Stealth", "Survival"],
+        proficiencies: {
+          armor: [],
+          skills: ["Stealth", "Survival"],
+          tools: ["tool 1"],
+          weapons: [],
+        },
         race: "Dwarf",
-        toolProficiencies: ["tool 1", "tool 2"],
+        subRace: "Hill Dwarf",
       };
 
       beforeEach(() => {
