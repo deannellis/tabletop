@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import RaceSelect from "./RaceSelect";
+import ConfigureRace from "./RaceSelect/ConfigureRace";
 import ClassSelect from "./ClassSelect";
 import ScoreAbilities from "./ScoreAbilities";
 import BonusAbilities from "./ScoreAbilities/BonusAbilities";
@@ -25,7 +26,8 @@ const CharacterGenerator = ({ history }) => {
     tools: [],
     skills: [],
   });
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [abilitiesModalIsOpen, setAbilitiesModalIsOpen] = useState(false);
+  const [raceModalIsOpen, setRaceModalIsOpen] = useState(false);
 
   const incrementStep = () => {
     setStep(step + 1);
@@ -165,7 +167,35 @@ const CharacterGenerator = ({ history }) => {
   const getStepJsx = (i) => {
     switch (i) {
       case 0:
-        return <RaceSelect onSelectRace={onSelectRace} />;
+        return (
+          <>
+            <Modal
+              isOpen={raceModalIsOpen}
+              handleClose={() => {
+                setRaceModalIsOpen(false);
+              }}
+              isMaxSize
+            >
+              <div className="modal">
+                <div className="modal__header">
+                  <h1>{`Configure your ${race}`}</h1>
+                </div>
+                <div className="modal__body">
+                  <ConfigureRace race={race} />
+                </div>
+                <div className="modal__actions">
+                  <button className="button">Go</button>
+                </div>
+              </div>
+            </Modal>
+            <RaceSelect
+              onSelectRace={(submittedRace) => {
+                setRaceModalIsOpen(true);
+                setRace(submittedRace);
+              }}
+            />
+          </>
+        );
       // TODO: Add Modal for race configuration
       // Dwarf - Tool Proficiency
       // Elf - subrace
@@ -180,9 +210,9 @@ const CharacterGenerator = ({ history }) => {
         return (
           <>
             <Modal
-              isOpen={modalIsOpen}
+              isOpen={abilitiesModalIsOpen}
               handleClose={() => {
-                setModalIsOpen(false);
+                setAbilitiesModalIsOpen(false);
               }}
               contentLabel="Bonus Abilities Modal"
             >
