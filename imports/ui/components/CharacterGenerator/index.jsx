@@ -32,20 +32,33 @@ const CharacterGenerator = ({ history }) => {
   const incrementStep = () => {
     setStep(step + 1);
   };
-  const onSelectRace = (race, bonusLang, dwarfType) => {
+  const onSelectRace = (
+    subRace,
+    bonusLang,
+    skillProficiencies,
+    toolProficiency
+  ) => {
     const { armor, weapons, tools, skills } = proficiencies;
     const proficiencyUpdates = { ...proficiencies };
     switch (race) {
       case "Dwarf":
         setKnownLanguages([...knownLanguages, "Dwarvish"]);
-        setSubRace(dwarfType);
-        proficiencyUpdates.armor = [...armor, "light armor", "medium armor"];
-        if (dwarfType === "Mountain Dwarf") {
-          setProficiencies(proficiencyUpdates);
+        setSubRace(subRace);
+        if (subRace === "Mountain Dwarf") {
+          proficiencyUpdates.armor = [...armor, "light armor", "medium armor"];
         }
+        proficiencyUpdates.tools = [...tools, toolProficiency];
+        setProficiencies(proficiencyUpdates);
         break;
       case "Elf":
         setKnownLanguages([...knownLanguages, "Elvish"]);
+        proficiencyUpdates.weapons = [
+          ...weapons,
+          "longsword",
+          "shortsword",
+          "longbow",
+          "shortbow",
+        ];
         proficiencyUpdates.skills = [...skills, "Perception"];
         setProficiencies(proficiencyUpdates);
         break;
@@ -59,11 +72,16 @@ const CharacterGenerator = ({ history }) => {
         setKnownLanguages([...knownLanguages, "Draconic"]);
         break;
       case "Gnome":
-        proficiencyUpdates.tools = [...tools, "tinker's tools"];
+        if (subRace === "Rock Gnome") {
+          proficiencyUpdates.tools = [...tools, "tinker's tools"];
+        }
         setKnownLanguages([...knownLanguages, "Gnomish"]);
+        setProficiencies(proficiencyUpdates);
         break;
       case "Half-Elf":
-        setKnownLanguages([...knownLanguages, "Elvish"]);
+        proficiencyUpdates.skills = [...skills, ...skillProficiencies];
+        setProficiencies(proficiencyUpdates);
+        setKnownLanguages([...knownLanguages, "Elvish", bonusLang]);
         break;
       case "Half-Orc":
         setKnownLanguages([...knownLanguages, "Orc"]);
@@ -73,7 +91,6 @@ const CharacterGenerator = ({ history }) => {
         setKnownLanguages([...knownLanguages, "Infernal"]);
         break;
     }
-    setRace(race);
     incrementStep();
   };
   const onSelectClass = (charClass) => {
@@ -181,28 +198,39 @@ const CharacterGenerator = ({ history }) => {
                   <h1>{`Configure your ${race}`}</h1>
                 </div>
                 <div className="modal__body">
-                  <ConfigureRace race={race} />
+                  <ConfigureRace race={race} onSubmit={onSelectRace} />
                 </div>
                 <div className="modal__actions">
-                  <button className="button">Go</button>
+                  <button
+                    className="button--outline"
+                    type="button"
+                    onClick={() => {
+                      setRaceModalIsOpen(false);
+                    }}
+                  >
+                    Back
+                  </button>
+                  <button className="button" form="race-config" type="submit">
+                    Next
+                  </button>
                 </div>
               </div>
             </Modal>
             <RaceSelect
               onSelectRace={(submittedRace) => {
-                setRaceModalIsOpen(true);
                 setRace(submittedRace);
+                if (
+                  submittedRace === "Half-Orc" ||
+                  submittedRace === "Tiefling"
+                ) {
+                  onSelectRace();
+                } else {
+                  setRaceModalIsOpen(true);
+                }
               }}
             />
           </>
         );
-      // TODO: Add Modal for race configuration
-      // Dwarf - Tool Proficiency
-      // Elf - subrace
-      // Halfling - subrace
-      // Dragonborn - draconic ancestry
-      // Gnome - subrace
-      // Half-Elf - skill versitility, extra language
 
       case 1:
         return <ClassSelect onSelectClass={onSelectClass} />;

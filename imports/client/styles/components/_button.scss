@@ -13,10 +13,11 @@
   color: #fff;
   border: 2px solid $brand-dusk--faded;
   outline: none;
-  box-shadow: $depth-2;
+  // box-shadow: $depth-1;
   transition: $default-transition;
   &:hover {
-    box-shadow: $depth-1;
+    box-shadow: $depth-2;
+    background: $brand-dusk--faded;
     border: 2px solid $brand-dusk;
   }
 }
@@ -40,4 +41,7 @@
   background: $brand-dusk--faded-O4;
   box-shadow: none;
   color: $brand-dusk;
+  &:hover {
+    background: $brand-dusk--faded-O4;
+  }
 }
