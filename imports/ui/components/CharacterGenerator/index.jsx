@@ -91,6 +91,7 @@ const CharacterGenerator = ({ history }) => {
         setKnownLanguages([...knownLanguages, "Infernal"]);
         break;
     }
+    setRaceModalIsOpen(false);
     incrementStep();
   };
   const onSelectClass = (charClass) => {
@@ -110,9 +111,19 @@ const CharacterGenerator = ({ history }) => {
         break;
       case "Elf":
         withRaceBonus.Dexterity += 2;
+        if (subRace === "High Elf") {
+          withRaceBonus.Intelligence += 1;
+        } else if (subRace === "Wood Elf") {
+          withRaceBonus.Wisdom += 1;
+        }
         break;
       case "Halfling":
         withRaceBonus.Dexterity += 2;
+        if (subRace === "Lightfoot") {
+          withRaceBonus.Charisma += 1;
+        } else if (subRace === "Stout") {
+          withRaceBonus.Constitution += 1;
+        }
         break;
       case "Human":
         const abilityKeys = Object.keys(abilities);
@@ -126,6 +137,11 @@ const CharacterGenerator = ({ history }) => {
         break;
       case "Gnome":
         withRaceBonus.Intelligence += 2;
+        if (subRace === "Forest Gnome") {
+          withRaceBonus.Dexterity += 1;
+        } else if (subRace === "Rock Gnome") {
+          withRaceBonus.Constitution += 1;
+        }
         break;
       case "Half-Elf":
         withRaceBonus.Charisma += 2;
@@ -141,7 +157,7 @@ const CharacterGenerator = ({ history }) => {
     }
     setAbilities(withRaceBonus);
     if (race === "Half-Elf") {
-      setModalIsOpen(true);
+      setAbilitiesModalIsOpen(true);
     } else {
       incrementStep();
     }
