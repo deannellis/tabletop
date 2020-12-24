@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import RaceSelect from "./RaceSelect";
+import ConfigureRace from "./RaceSelect/ConfigureRace";
 import ClassSelect from "./ClassSelect";
 import ScoreAbilities from "./ScoreAbilities";
 import BonusAbilities from "./ScoreAbilities/BonusAbilities";
@@ -25,25 +26,46 @@ const CharacterGenerator = ({ history }) => {
     tools: [],
     skills: [],
   });
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [abilitiesModalIsOpen, setAbilitiesModalIsOpen] = useState(false);
+  const [raceModalIsOpen, setRaceModalIsOpen] = useState(false);
 
   const incrementStep = () => {
     setStep(step + 1);
   };
-  const onSelectRace = (race, bonusLang, dwarfType) => {
+  const onSelectRace = (
+    subRace,
+    bonusLang,
+    skillProficiencies,
+    toolProficiency
+  ) => {
     const { armor, weapons, tools, skills } = proficiencies;
     const proficiencyUpdates = { ...proficiencies };
     switch (race) {
       case "Dwarf":
         setKnownLanguages([...knownLanguages, "Dwarvish"]);
-        setSubRace(dwarfType);
-        proficiencyUpdates.armor = [...armor, "light armor", "medium armor"];
-        if (dwarfType === "Mountain Dwarf") {
-          setProficiencies(proficiencyUpdates);
+        setSubRace(subRace);
+        if (subRace === "Mountain Dwarf") {
+          proficiencyUpdates.armor = [...armor, "light armor", "medium armor"];
         }
+        proficiencyUpdates.tools = [...tools, toolProficiency];
+        proficiencyUpdates.weapons = [
+          ...weapons,
+          "battleaxe",
+          "handaxe",
+          "throwing hammer",
+          "warhammer",
+        ];
+        setProficiencies(proficiencyUpdates);
         break;
       case "Elf":
         setKnownLanguages([...knownLanguages, "Elvish"]);
+        proficiencyUpdates.weapons = [
+          ...weapons,
+          "longsword",
+          "shortsword",
+          "longbow",
+          "shortbow",
+        ];
         proficiencyUpdates.skills = [...skills, "Perception"];
         setProficiencies(proficiencyUpdates);
         break;
@@ -57,11 +79,16 @@ const CharacterGenerator = ({ history }) => {
         setKnownLanguages([...knownLanguages, "Draconic"]);
         break;
       case "Gnome":
-        proficiencyUpdates.tools = [...tools, "tinker's tools"];
+        if (subRace === "Rock Gnome") {
+          proficiencyUpdates.tools = [...tools, "tinker's tools"];
+        }
         setKnownLanguages([...knownLanguages, "Gnomish"]);
+        setProficiencies(proficiencyUpdates);
         break;
       case "Half-Elf":
-        setKnownLanguages([...knownLanguages, "Elvish"]);
+        proficiencyUpdates.skills = [...skills, ...skillProficiencies];
+        setProficiencies(proficiencyUpdates);
+        setKnownLanguages([...knownLanguages, "Elvish", bonusLang]);
         break;
       case "Half-Orc":
         setKnownLanguages([...knownLanguages, "Orc"]);
@@ -71,7 +98,7 @@ const CharacterGenerator = ({ history }) => {
         setKnownLanguages([...knownLanguages, "Infernal"]);
         break;
     }
-    setRace(race);
+    setRaceModalIsOpen(false);
     incrementStep();
   };
   const onSelectClass = (charClass) => {
@@ -91,9 +118,19 @@ const CharacterGenerator = ({ history }) => {
         break;
       case "Elf":
         withRaceBonus.Dexterity += 2;
+        if (subRace === "High Elf") {
+          withRaceBonus.Intelligence += 1;
+        } else if (subRace === "Wood Elf") {
+          withRaceBonus.Wisdom += 1;
+        }
         break;
       case "Halfling":
         withRaceBonus.Dexterity += 2;
+        if (subRace === "Lightfoot") {
+          withRaceBonus.Charisma += 1;
+        } else if (subRace === "Stout") {
+          withRaceBonus.Constitution += 1;
+        }
         break;
       case "Human":
         const abilityKeys = Object.keys(abilities);
@@ -107,6 +144,11 @@ const CharacterGenerator = ({ history }) => {
         break;
       case "Gnome":
         withRaceBonus.Intelligence += 2;
+        if (subRace === "Forest Gnome") {
+          withRaceBonus.Dexterity += 1;
+        } else if (subRace === "Rock Gnome") {
+          withRaceBonus.Constitution += 1;
+        }
         break;
       case "Half-Elf":
         withRaceBonus.Charisma += 2;
@@ -122,7 +164,7 @@ const CharacterGenerator = ({ history }) => {
     }
     setAbilities(withRaceBonus);
     if (race === "Half-Elf") {
-      setModalIsOpen(true);
+      setAbilitiesModalIsOpen(true);
     } else {
       incrementStep();
     }
@@ -158,21 +200,60 @@ const CharacterGenerator = ({ history }) => {
       proficiencies,
     };
     console.log("payload: ", finalCharacter);
-    // Meteor.call("characters.insert", finalCharacter);
-    // history.push("/dashboard");
+    Meteor.call("characters.insert", finalCharacter);
+    history.push("/dashboard");
   };
   const stepLabels = ["Race", "Class", "Abilities", "Description", "Finish"];
   const getStepJsx = (i) => {
     switch (i) {
       case 0:
-        return <RaceSelect onSelectRace={onSelectRace} />;
-      // TODO: Add Modal for race configuration
-      // Dwarf - Tool Proficiency
-      // Elf - subrace
-      // Halfling - subrace
-      // Dragonborn - draconic ancestry
-      // Gnome - subrace
-      // Half-Elf - skill versitility, extra language
+        return (
+          <>
+            <Modal
+              isOpen={raceModalIsOpen}
+              handleClose={() => {
+                setRaceModalIsOpen(false);
+              }}
+              isMaxSize
+            >
+              <div className="modal">
+                <div className="modal__header">
+                  <h1>{`Configure your ${race}`}</h1>
+                </div>
+                <div className="modal__body">
+                  <ConfigureRace race={race} onSubmit={onSelectRace} />
+                </div>
+                <div className="modal__actions">
+                  <button
+                    className="button--outline"
+                    type="button"
+                    onClick={() => {
+                      setRaceModalIsOpen(false);
+                    }}
+                  >
+                    Back
+                  </button>
+                  <button className="button" form="race-config" type="submit">
+                    Next
+                  </button>
+                </div>
+              </div>
+            </Modal>
+            <RaceSelect
+              onSelectRace={(submittedRace) => {
+                setRace(submittedRace);
+                if (
+                  submittedRace === "Half-Orc" ||
+                  submittedRace === "Tiefling"
+                ) {
+                  onSelectRace();
+                } else {
+                  setRaceModalIsOpen(true);
+                }
+              }}
+            />
+          </>
+        );
 
       case 1:
         return <ClassSelect onSelectClass={onSelectClass} />;
@@ -180,9 +261,9 @@ const CharacterGenerator = ({ history }) => {
         return (
           <>
             <Modal
-              isOpen={modalIsOpen}
+              isOpen={abilitiesModalIsOpen}
               handleClose={() => {
-                setModalIsOpen(false);
+                setAbilitiesModalIsOpen(false);
               }}
               contentLabel="Bonus Abilities Modal"
             >

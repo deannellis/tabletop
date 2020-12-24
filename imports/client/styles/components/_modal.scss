@@ -20,3 +20,41 @@
 .ReactModal__Content {
   box-shadow: $depth-5;
 }
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.modal__header,
+.modal__body,
+.modal__actions {
+  padding: 0 $m-size;
+}
+
+.modal__header {
+  padding: $m-size;
+  border-bottom: 1px solid $medium-gray;
+  h1 {
+    margin: 0;
+    font-size: 2.4rem;
+  }
+}
+
+.modal__body {
+  flex-grow: 1;
+}
+
+.modal__actions {
+  display: flex;
+  background: $light-gray--O32;
+  border-top: 1px solid $medium-gray;
+  justify-content: flex-end;
+  align-items: center;
+  padding: $m-size;
+  button {
+    margin: 0 0 0 $s-size;
+  }
+}

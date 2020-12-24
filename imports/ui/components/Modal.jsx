@@ -7,20 +7,20 @@ const ModalComponent = ({
   isOpen,
   handleClose,
   contentLabel,
-  maxSize,
+  isMaxSize,
 }) => {
   const customStyles = {
     overlay: {
       backgroundColor: "#19171Adb",
-      display: maxSize ? "block" : "flex",
-      justifyContent: maxSize ? "" : "center",
-      alignItems: maxSize ? "" : "center",
+      display: isMaxSize ? "block" : "flex",
+      justifyContent: isMaxSize ? "" : "center",
+      alignItems: isMaxSize ? "" : "center",
     },
     content: {
-      inset: maxSize ? "6rem 8rem" : "",
-      padding: "1.6rem 1.6rem 3.2rem",
-      position: maxSize ? "absolute" : "relative",
-      textAlign: maxSize ? "left" : "center",
+      inset: isMaxSize ? "6rem 8rem" : "",
+      padding: "0",
+      position: isMaxSize ? "absolute" : "relative",
+      textAlign: isMaxSize ? "left" : "center",
     },
   };
   Modal.setAppElement("#react-target");
