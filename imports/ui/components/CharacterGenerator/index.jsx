@@ -48,6 +48,13 @@ const CharacterGenerator = ({ history }) => {
           proficiencyUpdates.armor = [...armor, "light armor", "medium armor"];
         }
         proficiencyUpdates.tools = [...tools, toolProficiency];
+        proficiencyUpdates.weapons = [
+          ...weapons,
+          "battleaxe",
+          "handaxe",
+          "throwing hammer",
+          "warhammer",
+        ];
         setProficiencies(proficiencyUpdates);
         break;
       case "Elf":
@@ -193,8 +200,8 @@ const CharacterGenerator = ({ history }) => {
       proficiencies,
     };
     console.log("payload: ", finalCharacter);
-    // Meteor.call("characters.insert", finalCharacter);
-    // history.push("/dashboard");
+    Meteor.call("characters.insert", finalCharacter);
+    history.push("/dashboard");
   };
   const stepLabels = ["Race", "Class", "Abilities", "Description", "Finish"];
   const getStepJsx = (i) => {

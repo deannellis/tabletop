@@ -27,7 +27,15 @@ const ConfigureRace = ({ race, onSubmit }) => {
   const skillNames = skills.map((skill) => skill.name);
   const availableLanguages = languages
     .map(({ language }) => {
-      if (language !== "Common") return language;
+      if (language === "Common") {
+        return undefined;
+      } else if (race === "Elf" && language === "Elvish") {
+        return undefined;
+      } else if (race === "Half-Elf" && language === "Elvish") {
+        return undefined;
+      } else {
+        return language;
+      }
     })
     .filter((language) => language != undefined);
   const ExtraLanguageSelect = () => (
